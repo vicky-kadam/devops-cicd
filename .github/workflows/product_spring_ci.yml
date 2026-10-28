@@ -68,7 +68,5 @@ jobs:
           context: product-backend
           push: true
           tags: |
-              ${{ secrets.DOCKERHUB_USERNAME }}/product-backend:latest
-              ${{ secrets.DOCKERHUB_USERNAME }}/product-backend:${{ github.sha }}
-              ${{ secrets.DOCKERHUB_USERNAME }}/product-backend:${{ github.ref_name }}
+              ${{ secrets.DOCKERHUB_USERNAME }}/product-backend:${{ github.run_number }}
 
