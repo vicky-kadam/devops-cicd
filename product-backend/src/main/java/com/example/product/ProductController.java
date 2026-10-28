@@ -28,7 +28,7 @@ public class ProductController {
         System.out.println("do something just crtae");
         return repository.findById(id)
                 .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());;
+                .orElse(ResponseEntity.notFound().build());
     }
 
     // POST /api/products  -> naya product
