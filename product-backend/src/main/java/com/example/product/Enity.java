@@ -9,4 +9,5 @@ public class Enity {
     private BigDecimal price;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private String category;
 }
