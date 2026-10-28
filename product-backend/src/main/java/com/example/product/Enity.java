@@ -10,4 +10,6 @@ public class Enity {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private String category;
+    private String skill;
+
 }
