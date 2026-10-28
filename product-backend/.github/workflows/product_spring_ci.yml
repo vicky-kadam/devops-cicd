@@ -2,30 +2,33 @@ name: product spring boot App to docker
 
 on:
   push:
-    build-test:
-      runs-on: ubuntu-latest
+    branches: [ "main" ]
 
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v4
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
 
-        - name: setup Jdk
-          uses: actions/setup-java@v6
-          with:
-                distribution: temurin
-                java-version: '25'
-          run: java --version
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
 
-        - name: Build and Test (maven)
-          working-directory: /Users/vicky/OneDrive/Desktop/AReact/prduct/product-backend
-          run: mvn -B clean verify
+      - name: Check Java version
+        run: java --version
 
-        - name: Upload Test Reports
-        - uses: actions/upload-artifact@v4
-          with:
+      - name: Build and Test (maven)
+        working-directory: product-backend
+        run: mvn -B clean verify
+
+      - name: Upload Test Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
           name: test-reports
-          path: /Users/vicky/OneDrive/Desktop/AReact/prduct/product-backend/target/surefire-reports
-
-
-
+          path: product-backend/target/surefire-reports
