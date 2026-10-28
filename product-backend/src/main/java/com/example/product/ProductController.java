@@ -25,9 +25,10 @@ public class ProductController {
     // GET /api/products/1  -> ek product
     @GetMapping("/{id}")
     public ResponseEntity<Product> getOne(@PathVariable Long id) {
+        System.out.println("do something just crtae");
         return repository.findById(id)
                 .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+                .orElse(ResponseEntity.notFound().build());;
     }
 
     // POST /api/products  -> naya product
