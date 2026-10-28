@@ -20,6 +20,8 @@ public class Product {
 
     @Column(updatable = false)
     private LocalDateTime createdAt;
+    private String category;
+
 
     private LocalDateTime updatedAt;
 
