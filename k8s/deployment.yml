@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-backend-deployment
+  labels:
+    app: product-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: product-backend
+  template:
+    metadata:
+      labels:
+        app: product-backend
+    spec:
+      containers:
+        - name: product-backend
+          # YOUR_DOCKERHUB_USERNAME ki jagah apna Docker Hub username likho
+          image: vickykadam/product-backend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:mysql://mysql-service:3306/product_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_ROOT_PASSWORD
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "512Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"
