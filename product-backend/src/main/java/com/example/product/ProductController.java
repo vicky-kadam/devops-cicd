@@ -26,6 +26,7 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<Product> getOne(@PathVariable Long id) {
         System.out.println("Everthin is working success fully");
+        System.out.println("new change lets go");
         return repository.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
